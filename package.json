@@ -13,7 +13,7 @@
   "scripts": {
     "prebuild": "bun test",
     "build": "tsup",
-    "prepublis": "bun run build",
+    "prepublish": "bun run build",
     "publish": "npm publish --access public",
     "lint": "biome check --write"
   },
