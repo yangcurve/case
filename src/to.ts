@@ -24,40 +24,42 @@ const CASE_FN = {
 
 type Case = keyof typeof CASE_FN;
 
+type ToCase<C extends Case, T> = {
+  camel: ToCamelCase<T>;
+  kebab: ToKebabCase<T>;
+  pascal: ToPascalCase<T>;
+  snake: ToSnakeCase<T>;
+  upperKebab: ToUpperKebabCase<T>;
+  upperSnake: ToUpperSnakeCase<T>;
+}[C];
+
 type ToCaseKeys<C extends Case, T extends Record<string, unknown>> = {
-  [K in keyof T as {
-    camel: ToCamelCase<K>;
-    kebab: ToKebabCase<K>;
-    pascal: ToPascalCase<K>;
-    snake: ToSnakeCase<K>;
-    upperKebab: ToUpperKebabCase<K>;
-    upperSnake: ToUpperSnakeCase<K>;
-  }[C]]: T[K] extends Record<string, unknown> ? ToCaseKeys<C, T[K]> : T[K];
+  [K in keyof T as ToCase<C, K>]: T[K] extends Record<string, unknown> ? ToCaseKeys<C, T[K]> : T[K];
 };
 
 export namespace to {
   export namespace camel {
-    export type Case<T> = ToCamelCase<T>;
+    export type Case<T> = ToCase<'camel', T>;
     export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'camel', T>;
   }
   export namespace kebab {
-    export type Case<T> = ToKebabCase<T>;
+    export type Case<T> = ToCase<'kebab', T>;
     export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'kebab', T>;
   }
   export namespace pascal {
-    export type Case<T> = ToPascalCase<T>;
+    export type Case<T> = ToCase<'pascal', T>;
     export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'pascal', T>;
   }
   export namespace snake {
-    export type Case<T> = ToSnakeCase<T>;
+    export type Case<T> = ToCase<'snake', T>;
     export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'snake', T>;
   }
   export namespace upperKebab {
-    export type Case<T> = ToUpperKebabCase<T>;
+    export type Case<T> = ToCase<'upperKebab', T>;
     export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'upperKebab', T>;
   }
   export namespace upperSnake {
-    export type Case<T> = ToUpperSnakeCase<T>;
+    export type Case<T> = ToCase<'upperSnake', T>;
     export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'upperSnake', T>;
   }
 

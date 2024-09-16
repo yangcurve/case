@@ -1,7 +1,7 @@
 {
   "name": "@yangcurve/case",
   "description": "TypeScript case converter",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "author": {
     "name": "yangcurve",
@@ -10,13 +10,16 @@
   "repository": {
     "url": "https://github.com/yangcurve/case"
   },
+  "scripts": {
+    "prebuild": "bun test",
+    "build": "tsup",
+    "prepublis": "bun run build",
+    "publish": "npm publish --access public",
+    "lint": "biome check --write"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
-  "scripts": {
-    "build": "tsup",
-    "lint": "biome check --write"
-  },
   "devDependencies": {
     "@biomejs/biome": "latest",
     "@types/bun": "latest",
