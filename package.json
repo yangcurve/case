@@ -1,7 +1,7 @@
 {
   "name": "@yangcurve/case",
   "description": "TypeScript case converter",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "author": {
     "name": "yangcurve",
@@ -13,8 +13,6 @@
   "scripts": {
     "prebuild": "bun test",
     "build": "tsup",
-    "prepublish": "bun run build",
-    "publish": "npm publish --access public",
     "lint": "biome check --write"
   },
   "main": "dist/index.js",
