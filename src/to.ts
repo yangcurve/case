@@ -70,7 +70,7 @@ export namespace to {
   }
   export namespace pascal {
     export type Case<T> = ToCase<'pascal', T>;
-    export type Objects<T extends object> = ToObject<'pascal', T>;
+    export type Object<T extends object> = ToObject<'pascal', T>;
   }
   export namespace snake {
     export type Case<T> = ToCase<'snake', T>;
