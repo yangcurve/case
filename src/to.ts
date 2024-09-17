@@ -33,27 +33,25 @@ type ToCase<C extends Case, T> = {
   upperSnake: ToUpperSnakeCase<T>;
 }[C];
 
-type ObjectOrArray = Record<string, unknown> | Record<number, unknown>;
-type ToCaseKeys<C extends Case, T extends ObjectOrArray> = T extends Record<string, unknown>
+type ToCaseKeys<C extends Case, T extends object> = T extends Record<string, unknown>
   ? {
-      [K in keyof T as ToCase<C, K>]: T[K] extends ObjectOrArray ? ToCaseKeys<C, T[K]> : T[K];
+      [K in keyof T as ToCase<C, K>]: T[K] extends object ? ToCaseKeys<C, T[K]> : T[K];
     }
-  : {
-      [K in keyof T]: T[K] extends ObjectOrArray ? ToCaseKeys<C, T[K]> : T[K];
-    };
+  : T extends Record<number, unknown>
+    ? {
+        [K in keyof T]: T[K] extends object ? ToCaseKeys<C, T[K]> : T[K];
+      }
+    : T;
 
 export namespace to {
   const to = <C extends Case>(c: C) => ({
     case: CASE_FN[c],
-    caseKeys: <T extends ObjectOrArray>(obj: T): ToCaseKeys<C, T> =>
+    caseKeys: <T extends object>(obj: T): ToCaseKeys<C, T> =>
       (Array.isArray(obj)
         ? obj.map(to(c).caseKeys)
         : obj.constructor === Object
           ? Object.fromEntries(
-              Object.entries(obj).map(([k, v]) => [
-                CASE_FN[c](k),
-                v instanceof Object ? to(c).caseKeys(v as ObjectOrArray) : v,
-              ]),
+              Object.entries(obj).map(([k, v]) => [CASE_FN[c](k), v instanceof Object ? to(c).caseKeys(v) : v]),
             )
           : obj) as ToCaseKeys<C, T>,
   });
