@@ -1,8 +1,8 @@
-biome.json
-tsconfig.json
-tsup.config.ts
+node_modules
+.github
 src
 test
-node_modules
+biome.json
+tsconfig.json
 .DS_Store
 bun.lockb
