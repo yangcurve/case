@@ -21,7 +21,7 @@ describe('object to X', () => {
   };
 
   test('camel', () => {
-    expect(to.camel.caseObject(FROM)).toEqual({
+    expect(to.camel.object(FROM)).toEqual({
       camelCaseKey: {
         kebabCaseKey: [
           {
@@ -40,7 +40,7 @@ describe('object to X', () => {
     });
 
     test('kebab', () => {
-      expect(to.kebab.caseObject(FROM)).toEqual({
+      expect(to.kebab.object(FROM)).toEqual({
         'camel-case-key': {
           'kebab-case-key': [
             {
@@ -60,7 +60,7 @@ describe('object to X', () => {
     });
 
     test('pascal', () => {
-      expect(to.pascal.caseObject(FROM)).toEqual({
+      expect(to.pascal.object(FROM)).toEqual({
         CamelCaseKey: {
           KebabCaseKey: [
             {
@@ -80,7 +80,7 @@ describe('object to X', () => {
     });
 
     test('snake', () => {
-      expect(to.snake.caseObject(FROM)).toEqual({
+      expect(to.snake.object(FROM)).toEqual({
         camel_case_key: {
           kebab_case_key: [
             {
@@ -100,7 +100,7 @@ describe('object to X', () => {
     });
 
     test('upper-kebab', () => {
-      expect(to.upperKebab.caseObject(FROM)).toEqual({
+      expect(to.upperKebab.object(FROM)).toEqual({
         'CAMEL-CASE-KEY': {
           'KEBAB-CASE-KEY': [
             {
@@ -120,7 +120,7 @@ describe('object to X', () => {
     });
 
     test('upper-snake', () => {
-      expect(to.upperSnake.caseObject(FROM)).toEqual({
+      expect(to.upperSnake.object(FROM)).toEqual({
         CAMEL_CASE_KEY: {
           KEBAB_CASE_KEY: [
             {
