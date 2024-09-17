@@ -22,7 +22,7 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "bun test",
-    "build": "tsup",
+    "build": "tsup src/index.ts --format cjs,esm --dts",
     "lint": "biome check --write"
   },
   "types": "dist/index.d.ts"
