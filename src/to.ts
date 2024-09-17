@@ -49,10 +49,11 @@ export namespace to {
       (Array.isArray(obj)
         ? obj.map(to(c).caseKeys)
         : Object.fromEntries(
-            Object.entries(obj).map(([k, v]) => [
-              CASE_FN[c](k),
-              v !== null && typeof v !== 'function' && typeof v === 'object' ? to(c).caseKeys(v as ObjectOrArray) : v,
-            ]),
+            Object.entries(obj).map(([k, v]) =>
+              typeof v === 'function'
+                ? [k, v]
+                : [CASE_FN[c](k), v instanceof Object ? to(c).caseKeys(v as ObjectOrArray) : v],
+            ),
           )) as ToCaseKeys<C, T>,
   });
   export const camel = to('camel');
