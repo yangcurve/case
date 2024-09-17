@@ -33,27 +33,27 @@ type ToCase<C extends Case, T> = {
   upperSnake: ToUpperSnakeCase<T>;
 }[C];
 
-type ToCaseKeys<C extends Case, T extends object> = T extends Record<string, unknown>
+type ToCaseObject<C extends Case, T extends object> = T extends Record<string, unknown>
   ? {
-      [K in keyof T as ToCase<C, K>]: T[K] extends object ? ToCaseKeys<C, T[K]> : T[K];
+      [K in keyof T as ToCase<C, K>]: T[K] extends object ? ToCaseObject<C, T[K]> : T[K];
     }
   : T extends Record<number, unknown>
     ? {
-        [K in keyof T]: T[K] extends object ? ToCaseKeys<C, T[K]> : T[K];
+        [K in keyof T]: T[K] extends object ? ToCaseObject<C, T[K]> : T[K];
       }
     : T;
 
 export namespace to {
   const to = <C extends Case>(c: C) => ({
     case: CASE_FN[c],
-    caseKeys: <T extends object>(obj: T): ToCaseKeys<C, T> =>
+    caseObject: <T extends object>(obj: T): ToCaseObject<C, T> =>
       (Array.isArray(obj)
-        ? obj.map(to(c).caseKeys)
+        ? obj.map(to(c).caseObject)
         : obj.constructor === Object
           ? Object.fromEntries(
-              Object.entries(obj).map(([k, v]) => [CASE_FN[c](k), v instanceof Object ? to(c).caseKeys(v) : v]),
+              Object.entries(obj).map(([k, v]) => [CASE_FN[c](k), v instanceof Object ? to(c).caseObject(v) : v]),
             )
-          : obj) as ToCaseKeys<C, T>,
+          : obj) as ToCaseObject<C, T>,
   });
   export const camel = to('camel');
   export const kebab = to('kebab');
@@ -64,26 +64,26 @@ export namespace to {
 
   export namespace camel {
     export type Case<T> = ToCase<'camel', T>;
-    export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'camel', T>;
+    export type CaseObject<T extends Record<string, unknown>> = ToCaseObject<'camel', T>;
   }
   export namespace kebab {
     export type Case<T> = ToCase<'kebab', T>;
-    export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'kebab', T>;
+    export type CaseObject<T extends Record<string, unknown>> = ToCaseObject<'kebab', T>;
   }
   export namespace pascal {
     export type Case<T> = ToCase<'pascal', T>;
-    export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'pascal', T>;
+    export type CasObjects<T extends Record<string, unknown>> = ToCaseObject<'pascal', T>;
   }
   export namespace snake {
     export type Case<T> = ToCase<'snake', T>;
-    export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'snake', T>;
+    export type CaseObject<T extends Record<string, unknown>> = ToCaseObject<'snake', T>;
   }
   export namespace upperKebab {
     export type Case<T> = ToCase<'upperKebab', T>;
-    export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'upperKebab', T>;
+    export type CaseObject<T extends Record<string, unknown>> = ToCaseObject<'upperKebab', T>;
   }
   export namespace upperSnake {
     export type Case<T> = ToCase<'upperSnake', T>;
-    export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'upperSnake', T>;
+    export type CaseObject<T extends Record<string, unknown>> = ToCaseObject<'upperSnake', T>;
   }
 }
