@@ -11,8 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-      - run: bun install
-      - run: bun run build
-      - uses: JS-DevTools/npm-publish@v3
+
+      - name: install dependencies
+        run: bun install
+
+      - name: test and build
+        run: bun run build
+
+      - name: publish
+        uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
