@@ -51,7 +51,7 @@ export namespace to {
         : Object.fromEntries(
             Object.entries(obj).map(([k, v]) => [
               CASE_FN[c](k),
-              typeof v === 'object' && v !== null ? to(c).caseKeys(v as Record<string, unknown>) : v,
+              v !== null && typeof v !== 'function' && typeof v === 'object' ? to(c).caseKeys(v as ObjectOrArray) : v,
             ]),
           )) as ToCaseKeys<C, T>,
   });
