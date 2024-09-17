@@ -19,7 +19,7 @@ const snake = to.snake.case('helloWorld');
 
 type Snake = to.snake.Case<'helloWorld'>;
 
-const snakeObject = to.snake.caseObject({
+const snakeObject = to.snake.object({
   arrayOfNumbers: [1, 2, 3],
   arrayOfObjects: [
     {

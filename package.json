@@ -1,7 +1,7 @@
 {
   "name": "@yangcurve/case",
   "description": "TypeScript case converter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "author": {
     "name": "yangcurve",
