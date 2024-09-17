@@ -43,6 +43,25 @@ type ToCaseKeys<C extends Case, T extends ObjectOrArray> = T extends Record<stri
     };
 
 export namespace to {
+  const to = <C extends Case>(c: C) => ({
+    case: CASE_FN[c],
+    caseKeys: <T extends ObjectOrArray>(obj: T): ToCaseKeys<C, T> =>
+      (Array.isArray(obj)
+        ? obj.map(to(c).caseKeys)
+        : Object.fromEntries(
+            Object.entries(obj).map(([k, v]) => [
+              CASE_FN[c](k),
+              v instanceof Object ? to(c).caseKeys(v as Record<string, unknown>) : v,
+            ]),
+          )) as ToCaseKeys<C, T>,
+  });
+  export const camel = to('camel');
+  export const kebab = to('kebab');
+  export const pascal = to('pascal');
+  export const snake = to('snake');
+  export const upperKebab = to('upperKebab');
+  export const upperSnake = to('upperSnake');
+
   export namespace camel {
     export type Case<T> = ToCase<'camel', T>;
     export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'camel', T>;
@@ -67,23 +86,4 @@ export namespace to {
     export type Case<T> = ToCase<'upperSnake', T>;
     export type CaseKeys<T extends Record<string, unknown>> = ToCaseKeys<'upperSnake', T>;
   }
-
-  const to = <C extends Case>(c: C) => ({
-    case: CASE_FN[c],
-    caseKeys: <T extends ObjectOrArray>(obj: T): ToCaseKeys<C, T> =>
-      (Array.isArray(obj)
-        ? obj.map(to(c).caseKeys)
-        : Object.fromEntries(
-            Object.entries(obj).map(([k, v]) => [
-              CASE_FN[c](k),
-              v instanceof Object ? to(c).caseKeys(v as Record<string, unknown>) : v,
-            ]),
-          )) as ToCaseKeys<C, T>,
-  });
-  export const camel = to('camel');
-  export const kebab = to('kebab');
-  export const pascal = to('pascal');
-  export const snake = to('snake');
-  export const upperKebab = to('upperKebab');
-  export const upperSnake = to('upperSnake');
 }
