@@ -43,9 +43,9 @@ type ToCaseKeys<C extends Case, T extends ObjectOrArray> = T extends Record<stri
     };
 
 export namespace to {
-  const isPlainObject = (obj: ObjectOrArray) => {
+  const isPlainObject = (obj: unknown) => {
     const prototype = Object.getPrototypeOf(obj);
-    return prototype === Object.getPrototypeOf({}) || prototype === null;
+    return prototype === null || prototype.constructor === Object;
   };
 
   const to = <C extends Case>(c: C) => ({
