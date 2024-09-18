@@ -1,7 +1,19 @@
 {
   "name": "@yangcurve/case",
   "description": "TypeScript case converter",
-  "version": "1.0.10",
+  "keywords": [
+    "typescript",
+    "case converter",
+    "camel case",
+    "camelCase",
+    "kebab case",
+    "kebab-case",
+    "pascal case",
+    "PascalCase",
+    "snake case",
+    "snake_case"
+  ],
+  "version": "1.0.11",
   "license": "MIT",
   "author": "yangcurve <utsu0621@gmail.com>",
   "repository": "github:yangcurve/case",
