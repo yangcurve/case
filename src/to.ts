@@ -21,17 +21,17 @@ type CaseMap<T = string> = {
   upperKebab: ToUpperKebabCase<T>
   upperSnake: ToUpperSnakeCase<T>
 }
-type Convert<C extends keyof CaseMap, T> = T extends string
-  ? CaseMap<T>[C]
-  : T extends Record<string, unknown>
-    ? {
-        [K in keyof T as Convert<C, K>]: T[K] extends object ? Convert<C, T[K]> : T[K]
-      }
-    : T extends Record<number, unknown>
-      ? {
-          [K in keyof T]: T[K] extends object ? Convert<C, T[K]> : T[K]
-        }
-      : T
+type Convert<C extends keyof CaseMap, T> =
+  T extends string ? CaseMap<T>[C]
+  : T extends Record<string, unknown> ?
+    {
+      [K in keyof T as Convert<C, K>]: T[K] extends object ? Convert<C, T[K]> : T[K]
+    }
+  : T extends Record<number, unknown> ?
+    {
+      [K in keyof T]: T[K] extends object ? Convert<C, T[K]> : T[K]
+    }
+  : T
 
 const caseMap = {
   camel: toCamelCase,
@@ -44,15 +44,11 @@ const caseMap = {
 const convert =
   <C extends keyof CaseMap>(c: C) =>
   <T>(o: T): Convert<C, T> =>
-    (typeof o === 'string'
-      ? caseMap[c](o)
-      : o?.constructor === Object
-        ? Object.fromEntries(
-            Object.entries(o).map(([k, v]) => [convert(c)(k), v instanceof Object ? convert(c)(v) : v]),
-          )
-        : Array.isArray(o)
-          ? o.map(convert(c))
-          : o) as Convert<C, T>
+    (typeof o === 'string' ? caseMap[c](o)
+    : o?.constructor === Object ?
+      Object.fromEntries(Object.entries(o).map(([k, v]) => [convert(c)(k), v instanceof Object ? convert(c)(v) : v]))
+    : Array.isArray(o) ? o.map(convert(c))
+    : o) as Convert<C, T>
 
 export namespace to {
   export type Camel<T> = Convert<'camel', T>
@@ -69,3 +65,27 @@ export namespace to {
   export const upperKebab = convert('upperKebab')
   export const upperSnake = convert('upperSnake')
 }
+
+const snake = to.snake('helloWorld')
+
+type Snake = to.Snake<'helloWorld'>
+
+const snakeObject = to.snake({
+  arrayOfNumbers: [1, 2, 3],
+  arrayOfObjects: [
+    {
+      helloWorld: 'hi',
+    },
+    {
+      itWorks: 'great',
+    },
+  ],
+  nestedObject: {
+    a1: {
+      a2: new Map(),
+    },
+    b1: {
+      b2: new Set(),
+    },
+  },
+})

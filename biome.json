@@ -7,14 +7,7 @@
     "enabled": true
   },
   "formatter": {
-    "indentStyle": "space",
-    "lineWidth": 120
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "single",
-      "semicolons": "asNeeded"
-    }
+    "enabled": false
   },
   "linter": {
     "enabled": true,

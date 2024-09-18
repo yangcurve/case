@@ -1,4 +1,5 @@
 # case
+
 TypeScript case converter
 
 ## Usage
@@ -15,9 +16,9 @@ import { to } from '@yangcurve/case'
 - `to.upperSnake`
 
 ```ts
-const snake = to.snake('helloWorld');
+const snake = to.snake('helloWorld')
 
-type Snake = to.Snake<'helloWorld'>;
+type Snake = to.Snake<'helloWorld'>
 
 const snakeObject = to.snake({
   arrayOfNumbers: [1, 2, 3],
@@ -37,5 +38,5 @@ const snakeObject = to.snake({
       b2: new Set(),
     },
   },
-});
+})
 ```
