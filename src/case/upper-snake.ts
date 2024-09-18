@@ -7,5 +7,5 @@ export type ToUpperSnakeCase<T> = T extends string
     : T
   : T;
 
-export const toUpperSnakeCase = <T extends string>(str: T) =>
-  (isConvertable(str) ? toSnakeCase(str).toUpperCase() : str) as ToUpperSnakeCase<T>;
+export const toUpperSnakeCase = <T extends string>(s: T) =>
+  (isConvertable(s) ? toSnakeCase(s).toUpperCase() : s) as ToUpperSnakeCase<T>;

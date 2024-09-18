@@ -9,21 +9,19 @@ type IsStringWithUnderscore<T extends string> = T extends `${string}_${string}` 
 type IsStringWithDash<T extends string> = T extends `${string}-${string}` ? true : false;
 
 type IsMixed<T extends string> = All<[IsStringWithUnderscore<T>, IsStringWithDash<T>]>;
-const isMixed = (str: string) => [str.includes('_'), str.includes('-')].every(Boolean);
+const isMixed = (s: string) => [s.includes('_'), s.includes('-')].every(Boolean);
 
 export type IsConvertable<T extends string> = Not<Any<[IsEmptyString<T>, IsStringWithWhiteSpace<T>, IsMixed<T>]>>;
-export const isConvertable = (str: string) => !(str === '' || str.includes(' ') || isMixed(str));
+export const isConvertable = (s: string) => !(s === '' || s.includes(' ') || isMixed(s));
 
 export type IsSnake<T extends string> = All<[IsConvertable<T>, IsStringWithUnderscore<T>]>;
 export type IsKebab<T extends string> = All<[IsConvertable<T>, IsStringWithDash<T>]>;
-export type IsCamel<T extends string> = All<
-  [IsConvertable<T>, Not<IsStringWithUnderscore<T>>, Not<IsStringWithDash<T>>]
->;
+export type IsCamel<T extends string> = All<[IsConvertable<T>, Not<IsStringWithUnderscore<T>>, Not<IsStringWithDash<T>>]>;
 
-export const isSnake = (str: string) => isConvertable(str) && str.includes('_');
-export const isKebab = (str: string) => isConvertable(str) && str.includes('-');
-export const isCamel = (str: string) => isConvertable(str) && !str.includes('_') && !str.includes('-');
+export const isSnake = (s: string) => isConvertable(s) && s.includes('_');
+export const isKebab = (s: string) => isConvertable(s) && s.includes('-');
+export const isCamel = (s: string) => isConvertable(s) && !s.includes('_') && !s.includes('-');
 
-export const capitalize = <T extends string>(str: T) => (str.charAt(0).toUpperCase() + str.slice(1)) as Capitalize<T>;
-export const uncapitalize = <T extends string>(str: T) =>
-  (str.charAt(0).toLowerCase() + str.slice(1)) as Uncapitalize<T>;
+export const capitalize = <T extends string>(s: T) => (s.charAt(0).toUpperCase() + s.slice(1)) as Capitalize<T>;
+export const uncapitalize = <T extends string>(s: T) =>
+  (s.charAt(0).toLowerCase() + s.slice(1)) as Uncapitalize<T>;

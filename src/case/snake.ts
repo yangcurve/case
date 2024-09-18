@@ -22,11 +22,11 @@ export type ToSnakeCase<T> = T extends string
         : T
   : T;
 
-export const toSnakeCase = <T extends string>(str: T) =>
-  (isCamel(str)
-    ? uncapitalize(str).replace(/[A-Z]/g, '_$&').toLowerCase()
-    : isKebab(str)
-      ? str.toLowerCase().replaceAll('-', '_')
-      : isSnake(str)
-        ? str.toLowerCase()
-        : str) as ToSnakeCase<T>;
+export const toSnakeCase = <T extends string>(s: T) =>
+  (isCamel(s)
+    ? uncapitalize(s).replace(/[A-Z]/g, '_$&').toLowerCase()
+    : isKebab(s)
+      ? s.toLowerCase().replaceAll('-', '_')
+      : isSnake(s)
+        ? s.toLowerCase()
+        : s) as ToSnakeCase<T>;

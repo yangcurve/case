@@ -22,11 +22,11 @@ export type ToKebabCase<T> = T extends string
         : T
   : T;
 
-export const toKebabCase = <T extends string>(str: T) =>
-  (isCamel(str)
-    ? uncapitalize(str).replace(/[A-Z]/g, '-$&').toLowerCase()
-    : isKebab(str)
-      ? str.toLowerCase()
-      : isSnake(str)
-        ? str.toLowerCase().replaceAll('_', '-')
-        : str) as ToKebabCase<T>;
+export const toKebabCase = <T extends string>(s: T) =>
+  (isCamel(s)
+    ? uncapitalize(s).replace(/[A-Z]/g, '-$&').toLowerCase()
+    : isKebab(s)
+      ? s.toLowerCase()
+      : isSnake(s)
+        ? s.toLowerCase().replaceAll('_', '-')
+        : s) as ToKebabCase<T>;

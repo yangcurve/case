@@ -18,11 +18,11 @@ export type ToCamelCase<T> = T extends string
         : T
   : T;
 
-export const toCamelCase = <T extends string>(str: T) =>
-  (isCamel(str)
-    ? uncapitalize(str)
-    : isKebab(str)
-      ? str.toLowerCase().replace(/-[a-z]/g, (match) => match.replace('-', '').toUpperCase())
-      : isSnake(str)
-        ? str.toLowerCase().replace(/_[a-z]/g, (match) => match.replace('_', '').toUpperCase())
-        : str) as ToCamelCase<T>;
+export const toCamelCase = <T extends string>(s: T) =>
+  (isCamel(s)
+    ? uncapitalize(s)
+    : isKebab(s)
+      ? s.toLowerCase().replace(/-[a-z]/g, (match) => match.replace('-', '').toUpperCase())
+      : isSnake(s)
+        ? s.toLowerCase().replace(/_[a-z]/g, (match) => match.replace('_', '').toUpperCase())
+        : s) as ToCamelCase<T>;
