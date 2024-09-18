@@ -13,17 +13,16 @@ import {
   toUpperSnakeCase,
 } from './case';
 
-type Case = 'camel' | 'kebab' | 'pascal' | 'snake' | 'upperKebab' | 'upperSnake';
-
-type Convert<C extends Case, T> = T extends string
-  ? {
-      camel: ToCamelCase<T>;
-      kebab: ToKebabCase<T>;
-      pascal: ToPascalCase<T>;
-      snake: ToSnakeCase<T>;
-      upperKebab: ToUpperKebabCase<T>;
-      upperSnake: ToUpperSnakeCase<T>;
-    }[C]
+type CaseMap<T = string> = {
+  camel: ToCamelCase<T>;
+  kebab: ToKebabCase<T>;
+  pascal: ToPascalCase<T>;
+  snake: ToSnakeCase<T>;
+  upperKebab: ToUpperKebabCase<T>;
+  upperSnake: ToUpperSnakeCase<T>;
+};
+type Convert<C extends keyof CaseMap, T> = T extends string
+  ? CaseMap<T>[C]
   : T extends Record<string, unknown>
     ? {
         [K in keyof T as Convert<C, K>]: T[K] extends object ? Convert<C, T[K]> : T[K];
@@ -33,18 +32,20 @@ type Convert<C extends Case, T> = T extends string
           [K in keyof T]: T[K] extends object ? Convert<C, T[K]> : T[K];
         }
       : T;
+
+const caseMap = {
+  camel: toCamelCase,
+  kebab: toKebabCase,
+  pascal: toPascalCase,
+  snake: toSnakeCase,
+  upperKebab: toUpperKebabCase,
+  upperSnake: toUpperSnakeCase,
+};
 const convert =
-  <C extends Case>(c: C) =>
+  <C extends keyof CaseMap>(c: C) =>
   <T>(obj: T): Convert<C, T> =>
     (typeof obj === 'string'
-      ? {
-          camel: toCamelCase,
-          kebab: toKebabCase,
-          pascal: toPascalCase,
-          snake: toSnakeCase,
-          upperKebab: toUpperKebabCase,
-          upperSnake: toUpperSnakeCase,
-        }[c](obj)
+      ? caseMap[c](obj)
       : obj?.constructor === Object
         ? Object.fromEntries(
             Object.entries(obj).map(([k, v]) => [convert(c)(k), v instanceof Object ? convert(c)(v) : v]),
