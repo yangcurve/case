@@ -1,4 +1,4 @@
-import { type IsCamel, type IsKebab, type IsSnake, isCamel, isKebab, isSnake, uncapitalize } from '../utils';
+import { type IsCamel, type IsKebab, type IsSnake, isCamel, isKebab, isSnake, uncapitalize } from '../utils'
 
 type FromCamelToSnake<T extends string> = T extends `${infer First}${infer Rest}`
   ? Rest extends ''
@@ -6,11 +6,11 @@ type FromCamelToSnake<T extends string> = T extends `${infer First}${infer Rest}
     : Rest extends Capitalize<Rest>
       ? `${Lowercase<First>}_${FromCamelToSnake<Rest>}`
       : `${Lowercase<First>}${FromCamelToSnake<Rest>}`
-  : T;
+  : T
 
 type FromKebabToSnake<T extends string> = Lowercase<T> extends `${infer First}-${infer Rest}`
   ? `${First}_${FromKebabToSnake<Rest>}`
-  : T;
+  : T
 
 export type ToSnakeCase<T> = T extends string
   ? IsSnake<T> extends true
@@ -20,7 +20,7 @@ export type ToSnakeCase<T> = T extends string
       : IsKebab<T> extends true
         ? FromKebabToSnake<T>
         : T
-  : T;
+  : T
 
 export const toSnakeCase = <T extends string>(s: T) =>
   (isCamel(s)
@@ -29,4 +29,4 @@ export const toSnakeCase = <T extends string>(s: T) =>
       ? s.toLowerCase().replaceAll('-', '_')
       : isSnake(s)
         ? s.toLowerCase()
-        : s) as ToSnakeCase<T>;
+        : s) as ToSnakeCase<T>

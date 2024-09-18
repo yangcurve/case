@@ -11,27 +11,27 @@ import {
   toSnakeCase,
   toUpperKebabCase,
   toUpperSnakeCase,
-} from './case';
+} from './case'
 
 type CaseMap<T = string> = {
-  camel: ToCamelCase<T>;
-  kebab: ToKebabCase<T>;
-  pascal: ToPascalCase<T>;
-  snake: ToSnakeCase<T>;
-  upperKebab: ToUpperKebabCase<T>;
-  upperSnake: ToUpperSnakeCase<T>;
-};
+  camel: ToCamelCase<T>
+  kebab: ToKebabCase<T>
+  pascal: ToPascalCase<T>
+  snake: ToSnakeCase<T>
+  upperKebab: ToUpperKebabCase<T>
+  upperSnake: ToUpperSnakeCase<T>
+}
 type Convert<C extends keyof CaseMap, T> = T extends string
   ? CaseMap<T>[C]
   : T extends Record<string, unknown>
     ? {
-        [K in keyof T as Convert<C, K>]: T[K] extends object ? Convert<C, T[K]> : T[K];
+        [K in keyof T as Convert<C, K>]: T[K] extends object ? Convert<C, T[K]> : T[K]
       }
     : T extends Record<number, unknown>
       ? {
-          [K in keyof T]: T[K] extends object ? Convert<C, T[K]> : T[K];
+          [K in keyof T]: T[K] extends object ? Convert<C, T[K]> : T[K]
         }
-      : T;
+      : T
 
 const caseMap = {
   camel: toCamelCase,
@@ -40,7 +40,7 @@ const caseMap = {
   snake: toSnakeCase,
   upperKebab: toUpperKebabCase,
   upperSnake: toUpperSnakeCase,
-};
+}
 const convert =
   <C extends keyof CaseMap>(c: C) =>
   <T>(o: T): Convert<C, T> =>
@@ -52,20 +52,20 @@ const convert =
           )
         : Array.isArray(o)
           ? o.map(convert(c))
-          : o) as Convert<C, T>;
+          : o) as Convert<C, T>
 
 export namespace to {
-  export type Camel<T> = Convert<'camel', T>;
-  export type Kebab<T> = Convert<'kebab', T>;
-  export type Pascal<T> = Convert<'pascal', T>;
-  export type Snake<T> = Convert<'snake', T>;
-  export type UpperKebab<T> = Convert<'upperKebab', T>;
-  export type UpperSnake<T> = Convert<'upperSnake', T>;
+  export type Camel<T> = Convert<'camel', T>
+  export type Kebab<T> = Convert<'kebab', T>
+  export type Pascal<T> = Convert<'pascal', T>
+  export type Snake<T> = Convert<'snake', T>
+  export type UpperKebab<T> = Convert<'upperKebab', T>
+  export type UpperSnake<T> = Convert<'upperSnake', T>
 
-  export const camel = convert('camel');
-  export const kebab = convert('kebab');
-  export const pascal = convert('pascal');
-  export const snake = convert('snake');
-  export const upperKebab = convert('upperKebab');
-  export const upperSnake = convert('upperSnake');
+  export const camel = convert('camel')
+  export const kebab = convert('kebab')
+  export const pascal = convert('pascal')
+  export const snake = convert('snake')
+  export const upperKebab = convert('upperKebab')
+  export const upperSnake = convert('upperSnake')
 }

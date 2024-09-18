@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "ignore": ["dist", "package.json"]
+    "ignore": ["dist"]
   },
   "organizeImports": {
     "enabled": true
@@ -10,15 +10,16 @@
     "indentStyle": "space",
     "lineWidth": 120
   },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "asNeeded"
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "single"
     }
   }
 }

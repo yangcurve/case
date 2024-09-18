@@ -1,5 +1,5 @@
-import { describe, expect, test } from 'bun:test';
-import { to } from '../src';
+import { describe, expect, test } from 'bun:test'
+import { to } from '../src'
 
 describe('object to X', () => {
   const FROM = {
@@ -18,7 +18,7 @@ describe('object to X', () => {
         },
       ],
     },
-  };
+  }
 
   test('camel', () => {
     const TO: to.Camel<typeof FROM> = {
@@ -37,9 +37,9 @@ describe('object to X', () => {
           },
         ],
       },
-    };
-    expect(to.camel(FROM)).toEqual(TO);
-  });
+    }
+    expect(to.camel(FROM)).toEqual(TO)
+  })
 
   test('kebab', () => {
     const TO: to.Kebab<typeof FROM> = {
@@ -58,9 +58,9 @@ describe('object to X', () => {
           },
         ],
       },
-    };
-    expect(to.kebab(FROM)).toEqual(TO);
-  });
+    }
+    expect(to.kebab(FROM)).toEqual(TO)
+  })
 
   test('pascal', () => {
     const TO: to.Pascal<typeof FROM> = {
@@ -79,9 +79,9 @@ describe('object to X', () => {
           },
         ],
       },
-    };
-    expect(to.pascal(FROM)).toEqual(TO);
-  });
+    }
+    expect(to.pascal(FROM)).toEqual(TO)
+  })
 
   test('snake', () => {
     const TO: to.Snake<typeof FROM> = {
@@ -100,9 +100,9 @@ describe('object to X', () => {
           },
         ],
       },
-    };
-    expect(to.snake(FROM)).toEqual(TO);
-  });
+    }
+    expect(to.snake(FROM)).toEqual(TO)
+  })
 
   test('upper-kebab', () => {
     const TO: to.UpperKebab<typeof FROM> = {
@@ -121,9 +121,9 @@ describe('object to X', () => {
           },
         ],
       },
-    };
-    expect(to.upperKebab(FROM)).toEqual(TO);
-  });
+    }
+    expect(to.upperKebab(FROM)).toEqual(TO)
+  })
 
   test('upper-snake', () => {
     const TO: to.UpperSnake<typeof FROM> = {
@@ -142,7 +142,7 @@ describe('object to X', () => {
           },
         ],
       },
-    };
-    expect(to.upperSnake(FROM)).toEqual(TO);
-  });
-});
+    }
+    expect(to.upperSnake(FROM)).toEqual(TO)
+  })
+})

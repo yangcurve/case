@@ -3,24 +3,20 @@
   "description": "TypeScript case converter",
   "version": "1.0.7",
   "license": "MIT",
-
   "author": "yangcurve <utsu0621@gmail.com>",
   "repository": "github:yangcurve/case",
-
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-
   "scripts": {
     "prebuild": "bun test",
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "lint": "biome check --write"
   },
-
   "devDependencies": {
-    "@biomejs/biome": "latest",
+    "@biomejs/biome": "^1.9.1",
     "@types/bun": "latest",
-    "tsup": "latest"
+    "tsup": "^8.3.0"
   },
   "peerDependencies": {
     "typescript": "latest"
