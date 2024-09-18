@@ -11,9 +11,7 @@
   "scripts": {
     "prebuild": "bun test",
     "build": "tsup src/index.ts --format cjs,esm --dts",
-    "format": "prettier -w ./",
-    "prelint": "bun run format",
-    "lint": "biome check --write"
+    "lint": "prettier -w ./ && biome check --write"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.1",

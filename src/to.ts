@@ -65,27 +65,3 @@ export namespace to {
   export const upperKebab = convert('upperKebab')
   export const upperSnake = convert('upperSnake')
 }
-
-const snake = to.snake('helloWorld')
-
-type Snake = to.Snake<'helloWorld'>
-
-const snakeObject = to.snake({
-  arrayOfNumbers: [1, 2, 3],
-  arrayOfObjects: [
-    {
-      helloWorld: 'hi',
-    },
-    {
-      itWorks: 'great',
-    },
-  ],
-  nestedObject: {
-    a1: {
-      a2: new Map(),
-    },
-    b1: {
-      b2: new Set(),
-    },
-  },
-})
