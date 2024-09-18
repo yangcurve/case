@@ -13,6 +13,12 @@
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "lint": "prettier -w ./ && biome check --write"
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 120,
+    "experimentalTernaries": true
+  },
   "devDependencies": {
     "@biomejs/biome": "^1.9.1",
     "@types/bun": "latest",
