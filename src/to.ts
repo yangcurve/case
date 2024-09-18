@@ -15,77 +15,56 @@ import {
 
 type Case = 'camel' | 'kebab' | 'pascal' | 'snake' | 'upperKebab' | 'upperSnake';
 
-type ToCase<C extends Case, T> = {
-  camel: ToCamelCase<T>;
-  kebab: ToKebabCase<T>;
-  pascal: ToPascalCase<T>;
-  snake: ToSnakeCase<T>;
-  upperKebab: ToUpperKebabCase<T>;
-  upperSnake: ToUpperSnakeCase<T>;
-}[C];
-
-type ToObject<C extends Case, T> = T extends string
-  ? ToCase<C, T>
+type Convert<C extends Case, T> = T extends string
+  ? {
+      camel: ToCamelCase<T>;
+      kebab: ToKebabCase<T>;
+      pascal: ToPascalCase<T>;
+      snake: ToSnakeCase<T>;
+      upperKebab: ToUpperKebabCase<T>;
+      upperSnake: ToUpperSnakeCase<T>;
+    }[C]
   : T extends Record<string, unknown>
     ? {
-        [K in keyof T as ToCase<C, K>]: T[K] extends object ? ToObject<C, T[K]> : T[K];
+        [K in keyof T as Convert<C, K>]: T[K] extends object ? Convert<C, T[K]> : T[K];
       }
     : T extends Record<number, unknown>
       ? {
-          [K in keyof T]: T[K] extends object ? ToObject<C, T[K]> : T[K];
+          [K in keyof T]: T[K] extends object ? Convert<C, T[K]> : T[K];
         }
       : T;
+const convert =
+  <C extends Case>(c: C) =>
+  <T>(obj: T): Convert<C, T> =>
+    (typeof obj === 'string'
+      ? {
+          camel: toCamelCase,
+          kebab: toKebabCase,
+          pascal: toPascalCase,
+          snake: toSnakeCase,
+          upperKebab: toUpperKebabCase,
+          upperSnake: toUpperSnakeCase,
+        }[c](obj)
+      : obj?.constructor === Object
+        ? Object.fromEntries(
+            Object.entries(obj).map(([k, v]) => [convert(c)(k), v instanceof Object ? convert(c)(v) : v]),
+          )
+        : Array.isArray(obj)
+          ? obj.map(convert(c))
+          : obj) as Convert<C, T>;
 
 export namespace to {
-  const to = <C extends Case>(c: C) => ({
-    case: {
-      camel: toCamelCase,
-      kebab: toKebabCase,
-      pascal: toPascalCase,
-      snake: toSnakeCase,
-      upperKebab: toUpperKebabCase,
-      upperSnake: toUpperSnakeCase,
-    }[c],
-    object: <T extends object>(obj: T): ToObject<C, T> =>
-      (typeof obj === 'string'
-        ? to(c).case(obj)
-        : Array.isArray(obj)
-          ? obj.map(to(c).object)
-          : obj.constructor === Object
-            ? Object.fromEntries(
-                Object.entries(obj).map(([k, v]) => [to(c).case(k), v instanceof Object ? to(c).object(v) : v]),
-              )
-            : obj) as ToObject<C, T>,
-  });
-  export const camel = to('camel');
-  export const kebab = to('kebab');
-  export const pascal = to('pascal');
-  export const snake = to('snake');
-  export const upperKebab = to('upperKebab');
-  export const upperSnake = to('upperSnake');
+  export type Camel<T> = Convert<'camel', T>;
+  export type Kebab<T> = Convert<'kebab', T>;
+  export type Pascal<T> = Convert<'pascal', T>;
+  export type Snake<T> = Convert<'snake', T>;
+  export type UpperKebab<T> = Convert<'upperKebab', T>;
+  export type UpperSnake<T> = Convert<'upperSnake', T>;
 
-  export namespace camel {
-    export type Case<T> = ToCase<'camel', T>;
-    export type Object<T> = ToObject<'camel', T>;
-  }
-  export namespace kebab {
-    export type Case<T> = ToCase<'kebab', T>;
-    export type Object<T> = ToObject<'kebab', T>;
-  }
-  export namespace pascal {
-    export type Case<T> = ToCase<'pascal', T>;
-    export type Object<T> = ToObject<'pascal', T>;
-  }
-  export namespace snake {
-    export type Case<T> = ToCase<'snake', T>;
-    export type Object<T> = ToObject<'snake', T>;
-  }
-  export namespace upperKebab {
-    export type Case<T> = ToCase<'upperKebab', T>;
-    export type Object<T> = ToObject<'upperKebab', T>;
-  }
-  export namespace upperSnake {
-    export type Case<T> = ToCase<'upperSnake', T>;
-    export type Object<T> = ToObject<'upperSnake', T>;
-  }
+  export const camel = convert('camel');
+  export const kebab = convert('kebab');
+  export const pascal = convert('pascal');
+  export const snake = convert('snake');
+  export const upperKebab = convert('upperKebab');
+  export const upperSnake = convert('upperSnake');
 }

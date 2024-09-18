@@ -21,7 +21,7 @@ describe('object to X', () => {
   };
 
   test('camel', () => {
-    const TO: to.camel.Object<typeof FROM> = {
+    const TO: to.Camel<typeof FROM> = {
       camelCaseKey: {
         kebabCaseKey: [
           {
@@ -38,11 +38,11 @@ describe('object to X', () => {
         ],
       },
     };
-    expect(to.camel.object(FROM)).toEqual(TO);
+    expect(to.camel(FROM)).toEqual(TO);
   });
 
   test('kebab', () => {
-    const TO: to.kebab.Object<typeof FROM> = {
+    const TO: to.Kebab<typeof FROM> = {
       'camel-case-key': {
         'kebab-case-key': [
           {
@@ -59,11 +59,11 @@ describe('object to X', () => {
         ],
       },
     };
-    expect(to.kebab.object(FROM)).toEqual(TO);
+    expect(to.kebab(FROM)).toEqual(TO);
   });
 
   test('pascal', () => {
-    const TO: to.pascal.Object<typeof FROM> = {
+    const TO: to.Pascal<typeof FROM> = {
       CamelCaseKey: {
         KebabCaseKey: [
           {
@@ -80,11 +80,11 @@ describe('object to X', () => {
         ],
       },
     };
-    expect(to.pascal.object(FROM)).toEqual(TO);
+    expect(to.pascal(FROM)).toEqual(TO);
   });
 
   test('snake', () => {
-    const TO: to.snake.Object<typeof FROM> = {
+    const TO: to.Snake<typeof FROM> = {
       camel_case_key: {
         kebab_case_key: [
           {
@@ -101,11 +101,11 @@ describe('object to X', () => {
         ],
       },
     };
-    expect(to.snake.object(FROM)).toEqual(TO);
+    expect(to.snake(FROM)).toEqual(TO);
   });
 
   test('upper-kebab', () => {
-    const TO: to.upperKebab.Object<typeof FROM> = {
+    const TO: to.UpperKebab<typeof FROM> = {
       'CAMEL-CASE-KEY': {
         'KEBAB-CASE-KEY': [
           {
@@ -122,11 +122,11 @@ describe('object to X', () => {
         ],
       },
     };
-    expect(to.upperKebab.object(FROM)).toEqual(TO);
+    expect(to.upperKebab(FROM)).toEqual(TO);
   });
 
   test('upper-snake', () => {
-    const TO: to.upperSnake.Object<typeof FROM> = {
+    const TO: to.UpperSnake<typeof FROM> = {
       CAMEL_CASE_KEY: {
         KEBAB_CASE_KEY: [
           {
@@ -143,6 +143,6 @@ describe('object to X', () => {
         ],
       },
     };
-    expect(to.upperSnake.object(FROM)).toEqual(TO);
+    expect(to.upperSnake(FROM)).toEqual(TO);
   });
 });

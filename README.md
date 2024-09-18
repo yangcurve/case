@@ -15,11 +15,11 @@ import { to } from '@yangcurve/case'
 - `to.upperSnake`
 
 ```ts
-const snake = to.snake.case('helloWorld');
+const snake = to.snake('helloWorld');
 
-type Snake = to.snake.Case<'helloWorld'>;
+type Snake = to.Snake<'helloWorld'>;
 
-const snakeObject = to.snake.object({
+const snakeObject = to.snake({
   arrayOfNumbers: [1, 2, 3],
   arrayOfObjects: [
     {
