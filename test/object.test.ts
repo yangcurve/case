@@ -21,7 +21,7 @@ describe('object to X', () => {
   }
 
   test('camel', () => {
-    const TO: to.Camel<typeof FROM> = {
+    const TO = {
       camelCaseKey: {
         kebabCaseKey: [
           {
@@ -37,12 +37,12 @@ describe('object to X', () => {
           },
         ],
       },
-    }
+    } satisfies to.Camel<typeof FROM>
     expect(to.camel(FROM)).toEqual(TO)
   })
 
   test('kebab', () => {
-    const TO: to.Kebab<typeof FROM> = {
+    const TO = {
       'camel-case-key': {
         'kebab-case-key': [
           {
@@ -58,7 +58,7 @@ describe('object to X', () => {
           },
         ],
       },
-    }
+    } satisfies to.Kebab<typeof FROM>
     expect(to.kebab(FROM)).toEqual(TO)
   })
 
@@ -84,7 +84,7 @@ describe('object to X', () => {
   })
 
   test('snake', () => {
-    const TO: to.Snake<typeof FROM> = {
+    const TO = {
       camel_case_key: {
         kebab_case_key: [
           {
@@ -100,12 +100,12 @@ describe('object to X', () => {
           },
         ],
       },
-    }
+    } satisfies to.Snake<typeof FROM>
     expect(to.snake(FROM)).toEqual(TO)
   })
 
   test('upper-kebab', () => {
-    const TO: to.UpperKebab<typeof FROM> = {
+    const TO = {
       'CAMEL-CASE-KEY': {
         'KEBAB-CASE-KEY': [
           {
@@ -121,12 +121,12 @@ describe('object to X', () => {
           },
         ],
       },
-    }
+    } satisfies to.UpperKebab<typeof FROM>
     expect(to.upperKebab(FROM)).toEqual(TO)
   })
 
   test('upper-snake', () => {
-    const TO: to.UpperSnake<typeof FROM> = {
+    const TO = {
       CAMEL_CASE_KEY: {
         KEBAB_CASE_KEY: [
           {
@@ -142,7 +142,7 @@ describe('object to X', () => {
           },
         ],
       },
-    }
+    } satisfies to.UpperSnake<typeof FROM>
     expect(to.upperSnake(FROM)).toEqual(TO)
   })
 })
