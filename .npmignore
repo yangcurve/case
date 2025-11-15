@@ -1,0 +1,8 @@
+node_modules
+.github
+src
+test
+eslint.config.ts
+tsconfig.json
+.DS_Store
+bun.lockb
