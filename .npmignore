@@ -1,6 +1,5 @@
 node_modules
 .github
-src
 test
 eslint.config.ts
 tsconfig.json
