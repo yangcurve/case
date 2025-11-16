@@ -7,7 +7,7 @@
       "devDependencies": {
         "@types/bun": "^1.3.2",
         "@types/node": "^24.10.1",
-        "@yangcurve/eslint": "^0.1.13",
+        "@yangcurve/eslint": "^0.1.14",
         "typescript": "latest",
       },
     },
@@ -181,7 +181,7 @@
 
     "@unrs/resolver-binding-win32-x64-msvc": ["@unrs/resolver-binding-win32-x64-msvc@1.11.1", "", { "os": "win32", "cpu": "x64" }, "sha512-lrW200hZdbfRtztbygyaq/6jP6AKE8qQN2KvPcJ+x7wiD038YtnYtZ82IMNJ69GJibV7bwL3y9FgK+5w/pYt6g=="],
 
-    "@yangcurve/eslint": ["@yangcurve/eslint@0.1.14", "", { "dependencies": { "@eslint/js": "^9.39.1", "@next/eslint-plugin-next": "^16.0.3", "@types/prettier": "^3.0.0", "@typescript-eslint/eslint-plugin": "^8.46.4", "@typescript-eslint/parser": "^8.46.4", "eslint": "^9.39.1", "eslint-config-prettier": "^10.1.8", "eslint-import-resolver-typescript": "^4.4.4", "eslint-plugin-import": "^2.32.0", "eslint-plugin-n": "^17.23.1", "eslint-plugin-no-relative-import-paths": "^1.6.1", "eslint-plugin-perfectionist": "^4.15.1", "eslint-plugin-prefer-arrow": "^1.2.3", "eslint-plugin-prettier": "^5.5.4", "eslint-plugin-react": "^7.37.5", "eslint-plugin-react-hooks": "^7.0.1", "eslint-plugin-tailwindcss": "^3.18.2", "eslint-plugin-unused-imports": "^4.3.0", "jiti": "^2.6.1", "prettier-plugin-tailwindcss": "^0.7.1", "typescript": "^5.9.3", "typescript-eslint": "^8.46.4" } }, "sha512-bXy3lz1lBMU0Sw3I5hVghFwPAPTrv2uQyqYYmolFmJ/a+qMVSkdOrUO/E80Xx+CEJfg3DWz9YcPApBciV66Fjw=="],
+    "@yangcurve/eslint": ["@yangcurve/eslint@0.1.15", "", { "dependencies": { "@eslint/js": "^9.39.1", "@next/eslint-plugin-next": "^16.0.3", "@types/prettier": "^3.0.0", "@typescript-eslint/eslint-plugin": "^8.46.4", "@typescript-eslint/parser": "^8.46.4", "eslint": "^9.39.1", "eslint-config-prettier": "^10.1.8", "eslint-import-resolver-typescript": "^4.4.4", "eslint-plugin-import": "^2.32.0", "eslint-plugin-n": "^17.23.1", "eslint-plugin-no-relative-import-paths": "^1.6.1", "eslint-plugin-perfectionist": "^4.15.1", "eslint-plugin-prefer-arrow": "^1.2.3", "eslint-plugin-prettier": "^5.5.4", "eslint-plugin-react": "^7.37.5", "eslint-plugin-react-hooks": "^7.0.1", "eslint-plugin-tailwindcss": "^3.18.2", "eslint-plugin-unused-imports": "^4.3.0", "jiti": "^2.6.1", "prettier-plugin-tailwindcss": "^0.7.1", "typescript": "^5.9.3", "typescript-eslint": "^8.46.4" } }, "sha512-vQv3rytWy0LEZhYvHm/JiI+wccKbVRy0b/WR/dNAKLIcxer0k5+f7VvxxodX5C7jIn5SZMnln5kduNhA8fnYQg=="],
 
     "acorn": ["acorn@8.15.0", "", { "bin": { "acorn": "bin/acorn" } }, "sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg=="],
 
