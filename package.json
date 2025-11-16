@@ -3,7 +3,7 @@
   "repository": "github:yangcurve/case",
   "author": "yangcurve <utsu0621@gmail.com>",
   "main": "src/index.ts",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "type": "module",
   "scripts": {
     "lint": "eslint --fix"
